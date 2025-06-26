@@ -1,0 +1,82 @@
+# Source code and development files
+src/
+*.ts
+!dist/**/*.d.ts
+
+# Development configuration
+.eslintrc*
+eslint.config.js
+.prettierrc*
+.prettierignore
+tsconfig.json
+tsconfig.build.json
+webpack.config.js
+
+# Build and development tools
+scripts/
+.vscode/
+.git/
+.github/
+
+# Source maps and debug files
+*.map
+*.d.ts.map
+*.js.map
+
+# Testing and examples
+src/examples/
+src/**/*.test.*
+src/**/*.spec.*
+**/*.test.*
+**/*.spec.*
+test/
+tests/
+__tests__/
+
+# Development dependencies and caches
+node_modules/
+.npm/
+.nyc_output/
+coverage/
+.coverage/
+
+# Logs and temporary files
+*.log
+.DS_Store
+.env
+.env.local
+.env.production
+*.tmp
+*.temp
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build artifacts that shouldn't be published
+dist/**/*.map
+dist/**/*.d.ts.map
+
+# Documentation that's not needed in npm package
+.github/
+.gitignore
+.gitattributes
+
+# Development scripts and configs
+.husky/
+.commitlint*
+.editorconfig
+.browserslistrc
+
+# Private/internal files
+private/
+internal/
+.private/ 

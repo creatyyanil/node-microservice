@@ -1,0 +1,86 @@
+{
+  "name": "@private/oss-fabric",
+  "version": "2.3.0",
+  "description": "A minimal, flexible TypeScript framework skeleton for microservices",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "rimraf dist && webpack --mode=production && npm run build:types",
+    "build:dev": "rimraf dist && webpack --mode=development && npm run build:types",
+    "build:types": "tsc --project tsconfig.build.json",
+    "prepare": "npm run build",
+    "start": "tsx src/examples/basic-service.ts",
+    "dev": "tsx src/examples/basic-service.ts",
+    "deprecation-test": "tsx src/examples/deprecation-demo.ts",
+    "lint": "eslint . --ext .ts && echo \"✅ ESLint passed! All TypeScript files are clean.\"",
+    "lint:debug": "eslint src/ --ext .ts --debug",
+    "lint:quiet": "eslint . --ext .ts --quiet",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "precommit": "npm run lint:fix && npm run format",
+    "test": "tsx src/examples/test-suite.ts",
+    "test:build": "node scripts/test-build.js",
+    "pack:dry": "npm pack --dry-run",
+    "pack:check": "npm run pack:dry | grep -E '(Tarball Contents|package size|unpacked size|total files)'",
+    "prepublishOnly": "npm run build",
+    "postbuild": "npm run test:build",
+    "type-check": "tsc --noEmit"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/lib/*.d.ts",
+    "dist/patterns/*.d.ts",
+    "README.md",
+    "CHANGELOG.md",
+    "DEVELOPER_GUIDE.md",
+    "QUICK_REFERENCE.md"
+  ],
+  "keywords": [
+    "private",
+    "microservices",
+    "nodejs",
+    "typescript",
+    "framework",
+    "internal",
+    "minimal",
+    "flexible",
+    "versioning"
+  ],
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.18.2",
+    "semver": "^7.5.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.0.0",
+    "@types/semver": "^7.5.6",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "prettier": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "terser-webpack-plugin": "^5.3.9",
+    "ts-loader": "^9.5.2",
+    "tsx": "^4.6.2",
+    "typescript": "~5.5.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "private"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  }
+}
