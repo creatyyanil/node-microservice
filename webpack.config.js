@@ -1,5 +1,6 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
@@ -48,15 +49,20 @@ module.exports = (env, argv) => {
           ],
           exclude: /node_modules/,
         },
+        {
+          test: /\.(js|cjs|mjs)$/,
+          type: 'javascript/auto',
+          exclude: /node_modules/,
+        },
       ],
     },
     resolve: {
-      extensions: ['.ts', '.js'],
+      extensions: ['.ts', '.js', '.cjs', '.mjs'],
       alias: {
         '@': path.resolve(__dirname, 'src'),
         '@/lib': path.resolve(__dirname, 'src/lib'),
-        '@/patterns': path.resolve(__dirname, 'src/patterns'),
         '@/examples': path.resolve(__dirname, 'src/examples'),
+        '@/msvcs': path.resolve(__dirname, 'src/msvcs'),
       },
     },
     output: {
@@ -96,6 +102,19 @@ module.exports = (env, argv) => {
       chunks: false,
       chunkModules: false,
     },
+    plugins: [
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: 'src/**/*.{js,cjs,mjs}',
+            to: '[path][name][ext]',
+            globOptions: {
+              ignore: ['**/node_modules/**'],
+            },
+          },
+        ],
+      }),
+    ],
     performance: {
       hints: false,
     },

@@ -10,7 +10,10 @@
     "emitDeclarationOnly": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.cjs",
+    "src/**/*.mjs"
   ],
   "exclude": [
     "src/examples/**/*",

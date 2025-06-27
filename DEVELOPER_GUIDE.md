@@ -10,7 +10,7 @@ A comprehensive guide for developers working with the OSS Fabric Framework.
 - [ESLint Configuration](#eslint-configuration)
 - [Prettier Configuration](#prettier-configuration)
 - [Library Usage](#library-usage)
-- [Microservice Patterns](#microservice-patterns)
+- [Multi-format JavaScript Support](#multi-format-javascript-support)
 - [API Reference](#api-reference)
 - [Troubleshooting](#troubleshooting)
 - [Best Practices](#best-practices)
@@ -18,7 +18,7 @@ A comprehensive guide for developers working with the OSS Fabric Framework.
 
 ## Overview
 
-OSS Fabric is a minimal, flexible TypeScript framework skeleton designed for building microservices with Node.js 22+. It provides version management, development tools, and ready-to-use patterns while maintaining simplicity and flexibility.
+OSS Fabric is a minimal, flexible TypeScript framework skeleton designed for building microservices with Node.js 22+. It provides version management, development tools, and multi-format JavaScript support while maintaining simplicity and flexibility.
 
 ### Key Features
 
@@ -27,7 +27,7 @@ OSS Fabric is a minimal, flexible TypeScript framework skeleton designed for bui
 - 🛠️ **Development Tools**: Pre-configured ESLint, Prettier, and TypeScript
 - 🏗️ **Build System**: Webpack-based compilation with optimization
 - 🔧 **Node.js 22+**: Modern JavaScript features and performance
-- 🎯 **Microservice Patterns**: Ready-to-use, customizable patterns
+- 🎯 **Multi-format Support**: TypeScript, JavaScript, CommonJS, and ES modules
 - 📐 **Minimal & Flexible**: Only essential features, easily extensible
 
 ## Setup & Installation
@@ -327,49 +327,54 @@ const status: ServiceStatus = {
 };
 ```
 
-## Microservice Patterns
+## Multi-format JavaScript Support
 
-### Basic Microservice Pattern
+The framework supports all JavaScript file formats seamlessly with proper linting and formatting.
+
+### TypeScript Usage (.ts)
 
 ```typescript
-import { BasicMicroservice } from '@private/oss-fabric/patterns/basic-microservice';
+import { VersionManager } from '@private/oss-fabric';
 
-// Create and configure service
-const service = new BasicMicroservice({
-  port: 3000,
-  serviceName: 'my-awesome-service',
-  version: '1.0.0'
-});
+const versionManager = new VersionManager();
+console.log('Current version:', versionManager.current());
+console.log('Package info:', versionManager.info());
 
-// Start the service
-service.start();
-
-// Access Express app for custom routes
-const app = service.getApp();
-app.get('/custom', (req, res) => {
-  res.json({ message: 'Custom endpoint' });
-});
+// Check for deprecation warnings
+versionManager.checkDeprecation();
 ```
 
-### Available Endpoints
+### CommonJS Usage (.cjs)
 
-When using `BasicMicroservice`, you get these endpoints automatically:
+```javascript
+const { VersionManager } = require('@private/oss-fabric');
 
-```bash
-# Health check
-GET /health
-# Response: { success: true, data: { service, version, framework, status, uptime } }
+const versionManager = new VersionManager();
+console.log('Current version:', versionManager.current());
 
-# Version info
-GET /version
-# Response: { success: true, data: { service, framework } }
+// Example microservice in CommonJS format
+function createMicroservice() {
+  versionManager.checkDeprecation();
+  console.log('Microservice initialized');
+}
 
-# Sample API
-GET /api/hello
-# Response: { success: true, data: { message, service } }
+module.exports = { createMicroservice };
 ```
 
-### Custom Microservice Pattern
+### ES Modules Usage (.mjs)
+
+```javascript
+import { VersionManager } from '@private/oss-fabric';
+
+const versionManager = new VersionManager();
+
+export function createService() {
+  console.log('Service version:', versionManager.current());
+  return versionManager.info();
+}
+```
+
+### Custom Microservice Implementation
 
 ```typescript
 import express from 'express';
@@ -391,6 +396,17 @@ class CustomMicroservice {
         timestamp: new Date().toISOString()
       };
       res.json(response);
+    });
+
+    this.app.get('/health', (req, res) => {
+      res.json({
+        success: true,
+        data: {
+          version: this.version.current(),
+          info: this.version.info(),
+          uptime: process.uptime()
+        }
+      });
     });
   }
 

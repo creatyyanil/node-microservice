@@ -5,6 +5,7 @@ const prettier = require('eslint-config-prettier');
 
 module.exports = [
   js.configs.recommended,
+  // TypeScript files configuration
   {
     files: ['**/*.ts'],
     languageOptions: {
@@ -43,8 +44,68 @@ module.exports = [
       '@typescript-eslint/no-inferrable-types': 'off',
     },
   },
+  // JavaScript files configuration (ES modules and CommonJS)
+  {
+    files: ['**/*.js', '**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2023,
+      sourceType: 'module',
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        Buffer: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        global: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        exports: 'readonly',
+      },
+    },
+    rules: {
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+      'no-console': 'off',
+      'no-undef': 'error',
+    },
+  },
+  // CommonJS files configuration
+  {
+    files: ['**/*.cjs'],
+    languageOptions: {
+      ecmaVersion: 2023,
+      sourceType: 'commonjs',
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        Buffer: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        global: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        exports: 'readonly',
+      },
+    },
+    rules: {
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+      'no-console': 'off',
+      'no-undef': 'error',
+    },
+  },
   prettier,
   {
-    ignores: ['dist/', 'node_modules/', '*.js', 'webpack.config.js', 'scripts/'],
+    ignores: ['dist/', 'node_modules/', 'webpack.config.js', 'scripts/'],
   },
 ];

@@ -7,7 +7,6 @@ A minimal, flexible TypeScript framework skeleton for microservices with Node.js
 - **[Developer Guide](DEVELOPER_GUIDE.md)** - Comprehensive guide with ESLint, Prettier, and detailed usage
 - **[Quick Reference](QUICK_REFERENCE.md)** - Common commands and troubleshooting
 - **[Changelog](CHANGELOG.md)** - Version history and updates
-- **[Patterns](src/patterns/README.md)** - Microservice patterns and examples
 
 ## Features
 
@@ -16,7 +15,7 @@ A minimal, flexible TypeScript framework skeleton for microservices with Node.js
 - ✅ **Development Tools**: ESLint v9, Prettier, and TypeScript configured
 - ✅ **Build System**: Webpack-based compilation with optimization
 - ✅ **Node.js 22+**: Modern JavaScript features and performance
-- ✅ **Microservice Patterns**: Ready-to-use TypeScript patterns
+- ✅ **Multi-format Support**: Supports .ts, .js, .cjs, .mjs files
 - ✅ **Minimal & Flexible**: Only what you need, extend as required
 - ✅ **Zero Conflicts**: ESLint and Prettier work together seamlessly
 
@@ -45,21 +44,24 @@ versionManager.checkDeprecation();
 console.log('Package info:', versionManager.info());
 ```
 
-### Using Microservice Patterns
+### Using with Microservices
 
-Copy and customize the patterns from `src/patterns/`:
+You can build microservices using the framework with any JavaScript format:
 
 ```typescript
-// Copy src/patterns/basic-microservice.ts to your project
-import { BasicMicroservice } from './basic-microservice';
+// TypeScript example
+import { VersionManager } from '@private/oss-fabric';
 
-const service = new BasicMicroservice({
-  port: 3000,
-  serviceName: 'my-service',
-  version: '1.0.0'
-});
+const versionManager = new VersionManager();
+console.log('Service version:', versionManager.current());
+```
 
-service.start();
+```javascript
+// CommonJS example (.cjs)
+const { VersionManager } = require('@private/oss-fabric');
+
+const versionManager = new VersionManager();
+console.log('Service version:', versionManager.current());
 ```
 
 ## Development Setup
@@ -113,12 +115,16 @@ npx eslint-config-prettier 'src/**/*.ts'
 # Output: "No rules that are unnecessary or conflict with Prettier were found."
 ```
 
-## Available Patterns
+## Multi-format JavaScript Support
 
-- **Basic Microservice**: Simple Express.js setup with health checks
-- **API Service**: Structured REST API with controllers and validation
+The framework supports all JavaScript file formats:
 
-See **[Developer Guide](DEVELOPER_GUIDE.md)** for detailed pattern documentation and usage examples.
+- **TypeScript (.ts)**: Full type safety and modern features
+- **JavaScript (.js)**: Standard JavaScript with ES modules
+- **CommonJS (.cjs)**: Traditional Node.js module format
+- **ES Modules (.mjs)**: Modern ES module format
+
+See **[Developer Guide](DEVELOPER_GUIDE.md)** for detailed usage examples and best practices.
 
 ## Scripts Reference
 
@@ -179,14 +185,15 @@ Full TypeScript support with:
 
 ```
 oss-fabric/
-├── src/                           # TypeScript source
+├── src/                           # Source code
 │   ├── lib/                      # Core framework code
 │   │   ├── types.ts              # Type definitions
 │   │   ├── utils.ts              # Utility functions
 │   │   └── version.ts            # Version management
-│   ├── patterns/                 # Microservice patterns
-│   │   ├── basic-microservice.ts
-│   │   └── README.md
+│   ├── msvcs/                    # Microservices (multi-format)
+│   │   ├── index.cjs             # CommonJS microservice
+│   │   └── msp/                  # MSP (Microservice Provider)
+│   ├── examples/                 # Usage examples
 │   └── index.ts                  # Main entry point
 ├── dist/                         # Compiled JavaScript
 ├── eslint.config.js              # ESLint v9 configuration

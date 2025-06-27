@@ -72,7 +72,7 @@ const validation = validateRequiredFields(obj, ['name', 'email']);
 
 ### Basic Microservice
 ```typescript
-import { BasicMicroservice } from './patterns/basic-microservice';
+import { VersionManager } from '@private/oss-fabric';
 
 const service = new BasicMicroservice({
   port: 3000,
@@ -126,7 +126,7 @@ service.start();
 - **[Developer Guide](DEVELOPER_GUIDE.md)** - Comprehensive documentation
 - **[README](README.md)** - Project overview
 - **[Changelog](CHANGELOG.md)** - Version history
-- **[Patterns](src/patterns/README.md)** - Microservice patterns
+- **[Multi-format Support](README.md#multi-format-javascript-support)** - JavaScript format support
 
 ## 💡 Pro Tips
 

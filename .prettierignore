@@ -1,4 +1,7 @@
 dist/
 node_modules/
+package-lock.json
 *.json
-*.md 
+*.md
+webpack.config.js
+scripts/ 

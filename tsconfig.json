@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "target": "ES2023",
     "module": "CommonJS",
     "lib": ["ES2023", "DOM"],
@@ -37,7 +38,6 @@
     "paths": {
       "@/*": ["src/*"],
       "@/lib/*": ["src/lib/*"],
-      "@/patterns/*": ["src/patterns/*"],
       "@/examples/*": ["src/examples/*"]
     }
   },
