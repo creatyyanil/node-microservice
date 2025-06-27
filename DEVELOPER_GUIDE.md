@@ -527,6 +527,79 @@ npm run build:dev
 3. **Use the precommit script** for consistency
 4. **Enable ESLint in your IDE** for real-time feedback
 
+## Package Distribution Management
+
+OSS Fabric includes a built-in package mode switcher for managing private and public distribution.
+
+### Package Modes
+
+#### Private Mode (Default)
+```bash
+npm run pkg:private
+```
+- **Name**: `@private/oss-fabric`
+- **License**: UNLICENSED
+- **Access**: restricted
+- **Repository**: private
+- **Keywords**: Includes "private", "internal"
+
+#### Public Mode
+```bash
+npm run pkg:public
+```
+- **Name**: `oss-fabric`
+- **License**: MIT
+- **Access**: public
+- **Repository**: Repository URL
+- **Keywords**: Includes "oss", "open-source"
+
+### Managing Package Modes
+
+```bash
+# Check current configuration
+npm run pkg:status
+
+# Switch to private mode
+npm run pkg:private
+
+# Switch to public mode
+npm run pkg:public
+
+# Show help
+npm run pkg:help
+```
+
+### Publishing Workflows
+
+#### Private Publishing
+```bash
+# Switch to private mode
+npm run pkg:private
+
+# Build and publish to private registry
+npm run build
+npm publish --registry=https://your-private-registry.com
+```
+
+#### Public Publishing
+```bash
+# Switch to public mode
+npm run pkg:public
+
+# Create LICENSE file (copy from LICENSE.template.md)
+# Build and publish to npm registry
+npm run build
+npm login
+npm publish
+```
+
+### Important Notes
+
+1. **LICENSE file**: Required for public mode, create from template
+2. **Keywords**: Automatically updated based on mode
+3. **Repository URL**: Updates to repository URL for public, "private" for private
+4. **Access control**: Managed via publishConfig
+
 ## Best Practices
 
 ### Code Quality

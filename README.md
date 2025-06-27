@@ -6,7 +6,9 @@ A minimal, flexible TypeScript framework skeleton for microservices with Node.js
 
 - **[Developer Guide](DEVELOPER_GUIDE.md)** - Comprehensive guide with ESLint, Prettier, and detailed usage
 - **[Quick Reference](QUICK_REFERENCE.md)** - Common commands and troubleshooting
-- **[Changelog](CHANGELOG.md)** - Version history and updates
+- **[Package Modes](PACKAGE_MODES.md)** - Complete guide to private/public distribution
+- **[Publishing Examples](PACKAGE_PUBLISHING_EXAMPLES.md)** - Step-by-step publishing scenarios
+- **[License Templates](LICENSE.template.md)** - Licensing information for different modes
 
 ## Features
 
@@ -154,6 +156,12 @@ npm test               # Run test suite
 npm run test:build     # Test build output
 npm run pack:dry       # Check what files will be published to npm
 npm run pack:check     # Quick summary of package contents
+
+# Package Mode Management
+npm run pkg:status      # Show current package mode (private/public)
+npm run pkg:private     # Switch to private package mode
+npm run pkg:public      # Switch to public package mode
+npm run pkg:help        # Show package mode help
 ```
 
 ## Configuration
@@ -234,9 +242,40 @@ This is a private internal framework. For contributions:
 5. **Update documentation for changes**
 6. **Add tests for new features**
 
+## Package Distribution Modes
+
+OSS Fabric supports both private and public distribution modes:
+
+### Private Mode (Default)
+- **Package name**: `@private/oss-fabric`
+- **License**: UNLICENSED  
+- **Access**: Restricted
+- **Use case**: Internal/corporate use
+
+### Public Mode
+- **Package name**: `oss-fabric`
+- **License**: MIT
+- **Access**: Public
+- **Use case**: Open source distribution
+
+### Switching Modes
+
+```bash
+# Check current mode
+npm run pkg:status
+
+# Switch to private mode
+npm run pkg:private
+
+# Switch to public mode (requires LICENSE file)
+npm run pkg:public
+```
+
+**📖 See [PACKAGE_MODES.md](PACKAGE_MODES.md) for complete documentation** on private/public distribution, publishing workflows, and detailed configuration options.
+
 ## License
 
-UNLICENSED - Private internal use only.
+Currently: UNLICENSED - Private internal use only.
 
 ---
 

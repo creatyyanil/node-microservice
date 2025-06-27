@@ -18,6 +18,14 @@ npm run dev                    # Run with hot reload
 npm run precommit              # Lint + Format (recommended before commits)
 ```
 
+### Package Management
+```bash
+npm run pkg:status             # Show current package mode (private/public)
+npm run pkg:private            # Switch to private package mode
+npm run pkg:public             # Switch to public package mode
+npm run pkg:help               # Package mode help
+```
+
 ### Code Quality
 ```bash
 npm run lint                   # ✅ ESLint passed! All TypeScript files are clean.
@@ -127,6 +135,7 @@ service.start();
 - **[README](README.md)** - Project overview
 - **[Changelog](CHANGELOG.md)** - Version history
 - **[Multi-format Support](README.md#multi-format-javascript-support)** - JavaScript format support
+- **[Package Modes](PACKAGE_MODES.md)** - Private/public distribution guide
 
 ## 💡 Pro Tips
 
@@ -135,6 +144,8 @@ service.start();
 3. **Use `npm run precommit`**: Ensures clean commits
 4. **Check debug output**: `npm run lint:debug` shows processed files
 5. **TypeScript strict mode**: Enabled for better type safety
+6. **Check package mode**: Use `npm run pkg:status` before publishing
+7. **Switch modes easily**: `npm run pkg:private` or `npm run pkg:public`
 
 ---
 

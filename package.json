@@ -26,7 +26,11 @@
     "pack:check": "npm run pack:dry | grep -E '(Tarball Contents|package size|unpacked size|total files)'",
     "prepublishOnly": "npm run build",
     "postbuild": "npm run test:build",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "pkg:private": "node scripts/package-mode.js private",
+    "pkg:public": "node scripts/package-mode.js public",
+    "pkg:status": "node scripts/package-mode.js status",
+    "pkg:help": "node scripts/package-mode.js help"
   },
   "files": [
     "dist/index.js",
@@ -35,9 +39,11 @@
     "dist/msvcs/**/*",
     "dist/src/msvcs/**/*",
     "README.md",
-    "CHANGELOG.md",
     "DEVELOPER_GUIDE.md",
-    "QUICK_REFERENCE.md"
+    "QUICK_REFERENCE.md",
+    "PACKAGE_MODES.md",
+    "PACKAGE_PUBLISHING_EXAMPLES.md",
+    "LICENSE.template.md"
   ],
   "keywords": [
     "private",
@@ -48,7 +54,8 @@
     "internal",
     "minimal",
     "flexible",
-    "versioning"
+    "versioning",
+    "multi-format"
   ],
   "license": "UNLICENSED",
   "dependencies": {
